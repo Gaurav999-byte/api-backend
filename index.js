@@ -46,6 +46,10 @@ app.get("/movies/:id", (req, res) => {
   }
 });
 
+const cors = require('cors');
+app.use(cors({ origin: "*" })); // ✅ Allows requests from anywhere
+
+
 // ✅ Start server
 app.listen(port, () => {
   console.log(`✅ Server is running on port ${port}`);
