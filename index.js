@@ -5,8 +5,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
-
-const port = process.env.PORT || 5000; // Use dynamic port for Render
+const port = 3000;
 
 // Path to the JSON file
 const moviesFilePath = path.join(__dirname, 'movies_data.json');
@@ -25,7 +24,7 @@ function readMoviesData() {
 // Route to get all movies
 app.get('/movies', (req, res) => {
   const movies = readMoviesData();
-  res.json(movies);
+  res.send(movies);
 });
 
 // Route to get a specific movie by ID
@@ -35,13 +34,13 @@ app.get('/movies/:id', (req, res) => {
   const movie = movies.find(m => m.id === movieId);
 
   if (movie) {
-    res.json(movie);
+    res.send(movie);
   } else {
-    res.status(404).json({ error: 'Movie not found' });
+    res.status(404).send({ error: 'Movie not found' });
   }
 });
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
